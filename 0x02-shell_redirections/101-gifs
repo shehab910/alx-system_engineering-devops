@@ -1,0 +1,2 @@
+#!/bin/bash
+find . -name "*.md" -type f -printf %f\\n | sort --ignore-case | cut -d. -f1
