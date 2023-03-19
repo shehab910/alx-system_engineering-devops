@@ -1,2 +1,2 @@
 #!/bin/bash
-mv $(ls | grep ^[[:upper:]]) /tmp/u/
+mv $(ls | grep ^[[:upper:]] | tr "\n" " ") /tmp/u/
