@@ -1,5 +1,5 @@
-# Client SSH configuration file so that you can connect to a server without typing a passwor
-file { '/home/shehab/.ssh/config':
+# Client SSH configuration file so that you can connect to a server without typing a password
+file { '~/.ssh/config':
   ensure  => present,
   content => "
     Host *
