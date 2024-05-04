@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# This script will set up key-based SSH authentication for all hosts
+cat << EOF > ~/.ssh/config
+Host *
+	IdentityFile ~/.ssh/school
+	PasswordAuthentication no
+EOF
