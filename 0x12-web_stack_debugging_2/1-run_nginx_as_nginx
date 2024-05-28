@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# This script will run a command as nginx
+sed -i 's/user  nginx;/user  nginx;\nlisten 8080;/g' /etc/nginx/nginx.conf
+service nginx restart
