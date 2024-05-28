@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+# Configure your Nginx server so that /redirect_me is redirecting to another page.
+
+# Requirements:
+
+# The redirection must be a “301 Moved Permanently”
+# You answer file should be a Bash script containing commands to automatically configure a Ubuntu machine to respect above requirements
+# Using what you did with 1-install_nginx_web_server, write 3-redirection so that it configures a brand new Ubuntu machine to the requirements asked in this task
+
+apt-get update
+
+apt-get install -y nginx
+
+# Configure nginx to listen on port 80
+# sed -i 's/listen 80 default_server;/listen 80;/g' /etc/nginx/sites-available/default
+sudo ufw allow 'Nginx HTTP'
+
+# Restart nginx
+service nginx restart
+
+# Create a temporary index.html file with "Hello World!" content
+echo "Hello World!" > /var/www/html/index.html
+
+# Replace the location block for /redirect_me with the desired configuration
+sed -i '/location \/redirect_me {/a \ \treturn 301 https://www.google.com/;' /etc/nginx/sites-available/redirect_me
+
+# Create a symbolic link to the sites-enabled directory
+ln -s /etc/nginx/sites-available/redirect_me /etc/nginx/sites-enabled/
+
+# Restart nginx
+service nginx restart
+
+# Test the redirection
+curl -sI http://localhost/redirect_me | grep "301 Moved Permanently" > /dev/null
